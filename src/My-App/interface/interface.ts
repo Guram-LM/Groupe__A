@@ -36,7 +36,33 @@ export interface UserType {
     profileImage: string, 
     country: string,
     city: string,
-    street: string,    
+    street: string,
+    role: "user";    
+}
+
+export interface CourierType {
+  firstName: string;
+  lastName: string;
+  pid: string;
+  phoneNumber: string;
+  email: string;
+  password: string;
+  profileImage: string;
+  role: "courier";
+  vehicle: string;
+  workingDays: string[];
+}
+
+
+export interface AdminType {
+  firstName: string;
+  lastName: string;
+  pid: string; 
+  phoneNumber: string;
+  email: string;
+  password: string;
+  profileImage: string;
+  role: "admin";
 }
 
 export interface UseLocation {
@@ -50,9 +76,4 @@ export interface LocationType {
     city: string,
     street: string,
     postIndex: string
-}
-
-export interface ValueProp {
-    value: UserType 
-    onChange: React.Dispatch<React.SetStateAction<UserType>>
 }

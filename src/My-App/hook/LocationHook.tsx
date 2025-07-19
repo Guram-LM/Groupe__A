@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { LocationType } from "../interface/interface"
 import axios from "axios";
-import { Location_App_Key, Location_URL } from "../../Appy_Key/Appy_Key";
+import { Location_App_Key, Location_URL } from "../Appy_Key/Appy_Key";
 
 
 interface LocationHookType {

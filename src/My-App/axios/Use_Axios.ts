@@ -1,0 +1,10 @@
+import type { AdminType, CourierType, UserType } from "../interface/interface";
+import { My_Axios } from "./My_Axios";
+
+export type SendDataType = UserType |  CourierType | AdminType
+export type RoleType = "user" |  "admin" | "courier"
+
+export const Use_Axios ={
+    post: (role: RoleType, sendData: SendDataType) => 
+          My_Axios.post(`/resource/${role}`, {data: [sendData]})
+}

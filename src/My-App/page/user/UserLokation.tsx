@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
-import { useLocation } from "../hook/LocationHook";
-import type { LocationInputeType, UseLocation } from "../interface/interface";
-import { useEffect, useMemo, useState,  } from "react";
+import { useLocation } from "../../hook/LocationHook";
+import type { LocationInputeType, UseLocation } from "../../interface/interface";
+import { useEffect, useMemo } from "react";
 
 
 interface LokationProps {
@@ -9,7 +9,7 @@ interface LokationProps {
   onChange: (value: UseLocation) => void
 }
 
-const Lokation:React.FC<LokationProps> = ({value, onChange}) => {
+const UserLokation:React.FC<LokationProps> = ({value, onChange}) => {
 
   const {loading, location, getLocation} = useLocation()
 
@@ -55,4 +55,4 @@ const Lokation:React.FC<LokationProps> = ({value, onChange}) => {
     </div>
   );
 };
-export default Lokation;
+export default UserLokation;

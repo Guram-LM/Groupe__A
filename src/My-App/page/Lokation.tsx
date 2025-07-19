@@ -1,50 +1,57 @@
-import { useState } from "react";
-import { Location_App_Key } from "../../Appy_Key/Appy_Key";
+import { TextField } from "@mui/material";
+import { useLocation } from "../hook/LocationHook";
+import type { LocationInputeType, UseLocation } from "../interface/interface";
+import { useEffect, useMemo, useState,  } from "react";
 
 
-const Lokation = () => {
+interface LokationProps {
+  value: UseLocation
+  onChange: (value: UseLocation) => void
+}
 
-  const [adres, setAdres] = useState("");
-  const [loading, setLoading] = useState(false);
+const Lokation:React.FC<LokationProps> = ({value, onChange}) => {
 
-  const getLokation = () => {
+  const {loading, location, getLocation} = useLocation()
 
-    setLoading(true);
+  useEffect(() => {
+    if(location) {
+      onChange({
+        city: `${location.city} ${location.postIndex}`,
+        country: location.country,
+        street: location.street
 
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
+      })
+    }
+  }, [location])
 
-        const locationURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${Location_App_Key}`;
-        try {
-          const response = await fetch(locationURL);
-          const data = await response.json();
-          if (data.status === "OK") {
-            const formattedAddress = data.results[0]?.formatted_address || "მისამართი ვერ მოიძებნა";
-            setAdres(formattedAddress);
-          } 
+  const adresinpute:LocationInputeType[] = [
+          {type: "text", name: "country", label: "country" },
+          {type: "text", name: "city", label: "city" },
+          {type: "text", name: "street", label: "street" },   
+    ]
 
-        } catch (error) {
-          console.error( error);
-          setAdres("დაფიქსირდა შეცდომა");
-        } finally {
-          setLoading(false);
-        }
-      },
-      
-      (error) => {
-        console.error(error);
-        setAdres("მდებარეობის წვდომა არ იქნა დაშვებული");
-        setLoading(false);
-      }
-    );
-  };
-  return (
-    <div>
-      <button onClick={getLokation} disabled={loading}>
+    const lokationButton = useMemo(() => {
+      return <button onClick={getLocation} disabled={loading}>
         {loading ? "იტვირთება..." : "მდებარეობის მიღება"}
       </button>
-      {adres && <p>მისამართი: {adres}</p>}
+    }, [loading])
+
+
+  
+  return (
+    <div>
+        {adresinpute.map(({type, label, name}) => 
+        <TextField key={name} type={type} name={name} label={label}
+                   fullWidth margin='normal'
+                   value={value[name]}
+                   onChange={(e) => onChange({
+                    ...value,
+                    [name]: e.target.value 
+                   })}
+                   
+        />
+        )}
+        {lokationButton}
     </div>
   );
 };

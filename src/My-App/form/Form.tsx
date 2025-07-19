@@ -1,21 +1,38 @@
-import React, { type ReactNode } from 'react'
-import type { InputeType } from '../interface/interface'
+import React, { type FormEvent, type ReactNode } from 'react'
+import type { InputeType, UserType } from '../interface/interface'
 import { TextField } from '@mui/material'
 
 interface FormPropsType {
     inpute: InputeType[]
     FormButton: ReactNode
+    onSubmit: (e:FormEvent<HTMLFormElement>) => void
+    value: UserType 
+    onChange: React.Dispatch<React.SetStateAction<UserType>>
 }
 
-const FormPage:React.FC <FormPropsType> = ({inpute, FormButton}) => {
+const FormPage:React.FC <FormPropsType> = ({inpute, FormButton, onSubmit, value, onChange}) => {
   return (
     
-    <form >
-        {inpute.map(inp => 
-            <TextField key={inp.name} type={inp.type} name={inp.name} label={inp.label}
-                fullWidth margin='normal'
+    <form onSubmit={onSubmit}>
+        {inpute.map((item, index) => {
+          if(item.type === "custom") {
+            return <div key={index}>{item.component} </div>
+          } return (
+            <TextField
+            key={item.name}
+            type={item.type}
+            name={item.name}
+            label={item.label}
+            fullWidth
+            margin='normal'
+            value={value[item.name]}
+            onChange={(e) => onChange((prev) => ({
+              ...prev,
+              [item.name]: e.target.value
+            }))}
             />
-        )}
+          )
+        })}
         {FormButton}
     </form>
   )

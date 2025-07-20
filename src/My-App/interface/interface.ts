@@ -40,18 +40,7 @@ export interface UserType {
     role: "user";    
 }
 
-export interface CourierType {
-  firstName: string;
-  lastName: string;
-  pid: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  profileImage: string;
-  role: "courier";
-  vehicle: string;
-  workingDays: string[];
-}
+
 
 
 export interface AdminType {

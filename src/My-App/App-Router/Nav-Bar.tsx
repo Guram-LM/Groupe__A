@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import UserRegistration from "../page/user/UserRegistration"
 import App_Leyout from "../page/app_leyout/App_Leyout"
 import UserList from "../page/user/UserList"
-import CourierTaim from "../page/corurier/CourierTaim"
+import { CourierRegistration } from "../page/corurier/CourierRegistration"
 
 
 
@@ -12,7 +12,7 @@ const NavBar = () => {
       <Route path="/" element={<App_Leyout/>} >
         <Route index element={<UserList/>}  />
         <Route path="registeration" element={<UserRegistration/>} />
-        <Route path="courierTime" element={<CourierTaim/>} />
+        <Route path="courierRegistration" element={<CourierRegistration/>} />
 
       </Route>
         

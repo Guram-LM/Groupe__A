@@ -38,7 +38,7 @@ const Header = () => {
           </Button>
           <Button
             component={Link}
-            to="/register/courier"
+            to="/courierTime"
             variant="contained"
             sx={{
               backgroundColor: "#2E7D32",

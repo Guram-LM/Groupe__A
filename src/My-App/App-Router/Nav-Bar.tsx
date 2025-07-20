@@ -3,6 +3,9 @@ import UserRegistration from "../page/user/UserRegistration"
 import App_Leyout from "../page/app_leyout/App_Leyout"
 import UserList from "../page/user/UserList"
 import { CourierRegistration } from "../page/corurier/CourierRegistration"
+import CourierList from "../page/corurier/CourierList"
+import AdminRegistration from "../page/admin/AdminRegistration"
+import AdminList from "../page/admin/AdminList"
 
 
 
@@ -13,6 +16,9 @@ const NavBar = () => {
         <Route index element={<UserList/>}  />
         <Route path="registeration" element={<UserRegistration/>} />
         <Route path="courierRegistration" element={<CourierRegistration/>} />
+        <Route path="couriersList" element={<CourierList/>} />
+        <Route path="adminRegistration" element={<AdminRegistration/>} />
+        <Route path="adminList" element={<AdminList/>} />
 
       </Route>
         

@@ -24,7 +24,7 @@ const CourierTaim:React.FC<CourierTaimprops> = ({onchange}) => {
 
   useEffect(() => {
     onchange(daySchedules )
-  }, [daySchedules, onchange])
+  }, [daySchedules])
 
 
   const toggleDay = (tag: string) => {

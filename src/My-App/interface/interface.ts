@@ -65,6 +65,25 @@ export interface AdminType {
   role: "admin";
 }
 
+export interface IUserResponseType {
+  id: string;
+  resource: string;
+  data: UserType;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserResponseType extends UserType {
+  id: string;
+}
+
+
+
+
+
+
+
+
 export interface UseLocation {
     country: string,
     city: string,

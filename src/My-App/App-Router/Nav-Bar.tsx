@@ -10,7 +10,7 @@ const NavBar = () => {
     <Routes>
       <Route path="/" element={<App_Leyout/>} >
         <Route index element={<UserList/>}  />
-        <Route path="/registeration" element={<UserRegistration/>} />
+        <Route path="registeration" element={<UserRegistration/>} />
       </Route>
         
 

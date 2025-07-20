@@ -1,5 +1,6 @@
 import { useGetUserQuery } from "../../store/RT_query/query"
-import { Box, Grid, Typography, Avatar, Paper, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography, Avatar, Paper, CircularProgress, Alert } from "@mui/material";
+import { Grid } from "@mui/material"; 
 
 
 const UserList = () => {

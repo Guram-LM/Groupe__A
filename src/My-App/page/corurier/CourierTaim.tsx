@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box, Button, FormControl, Grid, InputLabel,
   MenuItem, Select, Typography
 } from '@mui/material';
+import type { DaySchedule } from './CourierInterface';
+
+
+
+
 const tags = ["ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი", "კვირა"];
 const hours = ["08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
 const minutes = ["00", "10", "20", "30", "40", "50"];
-interface DaySchedule {
-  tag: string;
-  startHour: string;
-  startMinute: string;
-  endHour: string;
-  endMinute: string;
+
+interface  CourierTaimprops{
+  onchange: (daySchedules:DaySchedule[]) => void
 }
-const CourierTaim = () => {
+
+
+const CourierTaim:React.FC<CourierTaimprops> = ({onchange}) => {
+
+
   const [daySchedules, setDaySchedules] = useState<DaySchedule[]>([]);
+
+  useEffect(() => {
+    onchange(daySchedules )
+  }, [daySchedules, onchange])
+
+
   const toggleDay = (tag: string) => {
     setDaySchedules(prev => {
       const exists = prev.find(d => d.tag === tag);
@@ -41,16 +53,7 @@ const CourierTaim = () => {
       )
     );
   };
-  const handleSubmit = () => {
-    const selectedDays = daySchedules.map(d => d.tag);
-    const dayOff = tags.filter(tag => !selectedDays.includes(tag));
-    const result = {
-      workingDays: daySchedules,
-      dayOff: dayOff
-    };
-    console.log(":package: გასაგზავნი მონაცემები:", result);
-    // აქ შეგიძლია გააგზავნო POST თი
-  };
+  
   return (
     <Box p={4}>
       <Typography variant="h5" gutterBottom>კურიერის სამუშაო გრაფიკი</Typography>
@@ -153,11 +156,7 @@ const CourierTaim = () => {
           );
         })}
       </Grid>
-      <Box mt={4}>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          გრაფიკის შენახვა
-        </Button>
-      </Box>
+      
     </Box>
   );
 };

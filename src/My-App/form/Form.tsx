@@ -2,15 +2,15 @@ import React, { type FormEvent, type ReactNode } from 'react'
 import type { InputeType, UserType } from '../interface/interface'
 import { TextField } from '@mui/material'
 
-interface FormPropsType {
+interface FormPropsType<T> {
     inpute: InputeType[]
     FormButton: ReactNode
     onSubmit: (e:FormEvent<HTMLFormElement>) => void
-    value: UserType 
-    onChange: React.Dispatch<React.SetStateAction<UserType>>
+     value: T
+  onChange: React.Dispatch<React.SetStateAction<T>>
 }
 
-const FormPage:React.FC <FormPropsType> = ({inpute, FormButton, onSubmit, value, onChange}) => {
+const FormPage:React.FC <FormPropsType<T>> = ({inpute, FormButton, onSubmit, value, onChange}) => {
   return (
     
     <form onSubmit={onSubmit}>

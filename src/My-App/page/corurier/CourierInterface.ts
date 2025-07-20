@@ -20,6 +20,17 @@ export interface CourierType {
 
 
 
+export interface CourierRouResponseType {
+  id: string;
+  resource: string;
+  data: CourierType;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CourierResponseType extends CourierType {
+  id: string;
+}
 
 
 

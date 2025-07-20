@@ -1,11 +1,13 @@
 import { useMemo, useState, type FormEvent } from "react"
 import FormPage from "../../form/Form"
-import type { InputeType, UseLocation, UserType } from "../../interface/interface"
+
 import { Button } from "@mui/material"
 import UserLokation from "./UserLokation"
 import { useAppDispatch } from "../../store/ReduxHook"
 import { createUser } from "../../store/thanks/post/Post-Thamk"
 import { toast } from "react-toastify"
+import type { UseLocation, UserType } from "./UserInterface"
+import type { InputeType } from "../../form/FormInterface"
 
 
 
@@ -64,7 +66,7 @@ const UserRegistration = () => {
         return <Button type="submit">Create Profile</Button>
     }, [])
 
-    const inpute:InputeType[] = [
+    const inpute:InputeType<UserType>[] = [
         {type: "text", name: "profileImage", label: "profileImage" },
         {type: "text", name: "firstName", label: "firstName" },
         {type: "text", name: "lastName", label: "lastName" },

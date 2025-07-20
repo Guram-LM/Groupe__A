@@ -1,4 +1,6 @@
-import type { AdminType, CourierType, UserType } from "../interface/interface";
+import type { AdminType } from "../page/admin/AdminInterface";
+import type { CourierType } from "../page/corurier/CourierInterface";
+import type { UserType } from "../page/user/UserInterface";
 import { My_Axios } from "./My_Axios";
 
 export type SendDataType = UserType |  CourierType | AdminType

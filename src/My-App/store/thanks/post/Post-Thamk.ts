@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { UserType } from "../../../interface/interface";
 import { Use_Axios, type RoleType, type SendDataType } from "../../../axios/Use_Axios";
+import type { UserType } from "../../../page/user/UserInterface";
 
 export interface ResposeType {
     success: boolean,

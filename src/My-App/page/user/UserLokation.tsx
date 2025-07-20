@@ -1,7 +1,8 @@
 import { TextField } from "@mui/material";
 import { useLocation } from "../../hook/LocationHook";
-import type { LocationInputeType, UseLocation } from "../../interface/interface";
+
 import { useEffect, useMemo } from "react";
+import type { LocationInputeType, UseLocation } from "./UserInterface";
 
 
 interface LokationProps {

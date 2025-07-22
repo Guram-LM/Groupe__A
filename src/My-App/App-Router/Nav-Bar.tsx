@@ -18,6 +18,10 @@ import ValidationPage from "../components/login/ValidationPage"
 import ProtectedRoute from "../components/login/ProtectedRoute "
 import AboutPage from "../page/infoPages/AboutPage"
 import ContactPage from "../page/infoPages/ContactPage"
+import CouriersLeyout from "../page/corurier/CouriersLeyout"
+import CouriersProfile from "../page/corurier/CouriersProfile"
+import AdminLayout from "../page/admin/AdminLayout"
+import AdminProfile from "../page/admin/AdminProfile"
 
 
 
@@ -45,6 +49,7 @@ const NavBar = () => {
         <Route path="contactPage" element={<ContactPage/>} />
         <Route path="aboutPage" element={<AboutPage/>} />
 
+
         <Route path="user" element={
           <ProtectedRoute userDatas={geste} userRole="user">
             <UserLayout/>
@@ -55,6 +60,20 @@ const NavBar = () => {
             <Route path="userProfile" element={<UserProfile/>} />
             <Route path="deliverRequest" element={<DeliverRequest/>} />
         </Route>
+
+
+
+        <Route path="courier" element={
+          <ProtectedRoute userDatas={geste} userRole="courier" >
+            <CouriersLeyout/>
+          </ProtectedRoute>
+        } >
+
+          <Route path="CouriersProfile" element={<CouriersProfile/>} />
+          <Route path="couriersList" element={<CourierList/>} />
+
+        </Route>
+        
  
         
 
@@ -64,9 +83,23 @@ const NavBar = () => {
       </Route>
 
 
-        <Route path="couriersList" element={<CourierList/>} />
-        <Route path="userList" element={<UserList/>} />
-        <Route path="adminList" element={<AdminList/>} />
+        <Route path="/admin" element={
+          <ProtectedRoute userDatas={geste} userRole="admin">
+             <AdminLayout/> 
+          </ProtectedRoute>
+        } >
+
+          <Route path="adminProfile" element={<AdminProfile/>} />
+          <Route path="userList" element={<UserList/>} />
+          <Route path="adminList" element={<AdminList/>} />
+          <Route path="couriersList" element={<CourierList/>} />
+          <Route path="userRegistration" element={<UserRegistration/>} />
+          <Route path="courierRegistration" element={<CourierRegistration/>} />
+        
+        </Route>
+
+
+        
         
         
 

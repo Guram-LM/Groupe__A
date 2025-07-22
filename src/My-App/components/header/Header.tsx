@@ -1,12 +1,26 @@
 import HeaderLogo from './HeaderLogo'
 import HeaderNav from './HeaderNav'
 import HeaderButton from './HeaderButton'
-import { Box, Avatar } from '@mui/material'
+import { Box, Avatar, IconButton } from '@mui/material'
+import { useState } from 'react'
+import UserMenu from '../MenuButton/UserMenu'
+
 
 const Header = () => {
   const getItem = localStorage.getItem('geste')
   const appgest = getItem ? JSON.parse(getItem) : null
-  const gestName = appgest?.name?.[0]?.toUpperCase() || ''
+  const gestName = appgest?.firstName?.[0]?.toUpperCase() || ''
+
+  
+  const [menuButton, setmenuButton] = useState<null | HTMLElement>(null)
+
+  const Click = (event: React.MouseEvent<HTMLElement>) => {
+    setmenuButton(event.currentTarget)
+  }
+
+  const onClose = () => {
+    setmenuButton(null)
+  }
 
   return (
     <Box
@@ -23,10 +37,19 @@ const Header = () => {
     >
       <HeaderLogo />
       <HeaderNav />
+
       {appgest ? (
-        <Avatar sx={{ bgcolor: 'white', color: '#1976d2' }}>
-          {gestName}
-        </Avatar>
+        <>
+
+          <IconButton onClick={Click}>
+            <Avatar sx={{ bgcolor: 'white', color: '#1976d2' }}>
+              {gestName}
+            </Avatar>
+          </IconButton>
+
+         
+          <UserMenu menuButton={menuButton} onClose={onClose} />
+        </>
       ) : (
         <HeaderButton />
       )}

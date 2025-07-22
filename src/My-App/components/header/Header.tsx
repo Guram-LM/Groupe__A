@@ -1,138 +1,37 @@
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import HeaderLogo from './HeaderLogo'
+import HeaderNav from './HeaderNav'
+import HeaderButton from './HeaderButton'
+import { Box, Avatar } from '@mui/material'
+
 const Header = () => {
+  const getItem = localStorage.getItem('geste')
+  const appgest = getItem ? JSON.parse(getItem) : null
+  const gestName = appgest?.name?.[0]?.toUpperCase() || ''
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1E1E2F", boxShadow: 3 }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* მარცხენა - ლოგო ან რეგისტრაციის ლინკი */}
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography
-            component={Link}
-            to="/"
-            variant="h6"
-            sx={{
-              fontWeight: "bold",
-              textDecoration: "none",
-              color: "white",
-              '&:hover': { color: "#B39DDB" },
-            }}
-          >
-            რეგისტრაცია
-          </Typography>
-        </Box>
-        {/* შუა ღილაკები - Users/Couriers list */}
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            component={Link}
-            to="/adminList"
-            variant="text"
-            sx={{
-              color: "#BBDEFB",
-              '&:hover': {
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-              },
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            Users List
-          </Button>
+    <Box
+      component="header"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 16px',
+        height: 64,
+        bgcolor: '#1976d2',
+        color: 'white',
+      }}
+    >
+      <HeaderLogo />
+      <HeaderNav />
+      {appgest ? (
+        <Avatar sx={{ bgcolor: 'white', color: '#1976d2' }}>
+          {gestName}
+        </Avatar>
+      ) : (
+        <HeaderButton />
+      )}
+    </Box>
+  )
+}
 
-          <Button
-            component={Link}
-            to="/deliverRequest"
-            variant="text"
-            sx={{
-              color: "#BBDEFB",
-              '&:hover': {
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-              },
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            Delivery
-          </Button>
-
-
-          <Button
-            component={Link}
-            to="/couriersList"
-            variant="text"
-            sx={{
-              color: "#C8E6C9",
-              '&:hover': {
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-              },
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            Couriers List
-          </Button>
-        </Box>
-        {/* მარჯვენა ღილაკები - რეგისტრაცია */}
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            component={Link}
-            to="/adminRegistration"
-            variant="contained"
-            sx={{
-              backgroundColor: "#6A1B9A",
-              '&:hover': { backgroundColor: "#4A148C" },
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            როგორც ადმინი
-          </Button>
-          <Button
-            component={Link}
-            to="/registeration"
-            variant="contained"
-            sx={{
-              backgroundColor: "#0277BD",
-              '&:hover': { backgroundColor: "#01579B" },
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            როგორც იუზერი
-          </Button>
-          <Button
-            component={Link}
-            to="/courierRegistration"
-            variant="contained"
-            sx={{
-              backgroundColor: "#2E7D32",
-              '&:hover': { backgroundColor: "#1B5E20" },
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            როგორც კურიერი
-          </Button>
-
-           <Button
-            component={Link}
-            to="/logonPage"
-            variant="contained"
-            sx={{
-              backgroundColor: "#2E7D32",
-              '&:hover': { backgroundColor: "#1B5E20" },
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 600,
-            }}
-          >
-            შესვლა
-          </Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
-};
-export default Header;
+export default Header

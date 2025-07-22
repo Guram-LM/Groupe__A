@@ -37,6 +37,24 @@ const Header = () => {
           >
             Users List
           </Button>
+
+          <Button
+            component={Link}
+            to="/deliverRequest"
+            variant="text"
+            sx={{
+              color: "#BBDEFB",
+              '&:hover': {
+                backgroundColor: "rgba(255, 255, 255, 0.08)",
+              },
+              textTransform: "none",
+              fontWeight: 600,
+            }}
+          >
+            Delivery
+          </Button>
+
+
           <Button
             component={Link}
             to="/couriersList"
@@ -96,6 +114,21 @@ const Header = () => {
             }}
           >
             როგორც კურიერი
+          </Button>
+
+           <Button
+            component={Link}
+            to="/logonPage"
+            variant="contained"
+            sx={{
+              backgroundColor: "#2E7D32",
+              '&:hover': { backgroundColor: "#1B5E20" },
+              borderRadius: 2,
+              textTransform: "none",
+              fontWeight: 600,
+            }}
+          >
+            შესვლა
           </Button>
         </Box>
       </Toolbar>

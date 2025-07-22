@@ -1,8 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import postSlice from "./thanks/post/Post-slice"
 import { Get_Response } from "./RT_query/query";
+import deleteSlice from "./thanks/delete/delete-slice"
+import updateSlice from "./thanks/update/update-slice"
+
+
 const root = combineReducers({
     post: postSlice,
+    delete: deleteSlice,
+    updata:updateSlice,
     [Get_Response.reducerPath]: Get_Response.reducer
 })
 

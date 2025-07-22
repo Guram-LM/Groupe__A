@@ -16,6 +16,8 @@ import WehlenRegisterStatus from "../components/registration/WehlenRegisterStatu
 import HomePage from "../page/home/HomePage"
 import ValidationPage from "../components/login/ValidationPage"
 import ProtectedRoute from "../components/login/ProtectedRoute "
+import AboutPage from "../page/infoPages/AboutPage"
+import ContactPage from "../page/infoPages/ContactPage"
 
 
 
@@ -40,6 +42,8 @@ const NavBar = () => {
         <Route path="userRegistration" element={<UserRegistration/>} />
         <Route path="courierRegistration" element={<CourierRegistration/>} />
         <Route path="adminRegistration" element={<AdminRegistration/>} />
+        <Route path="contactPage" element={<ContactPage/>} />
+        <Route path="aboutPage" element={<AboutPage/>} />
 
         <Route path="user" element={
           <ProtectedRoute userDatas={geste} userRole="user">

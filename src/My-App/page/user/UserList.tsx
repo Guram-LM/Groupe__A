@@ -1,66 +1,90 @@
-import { useGetUserQuery } from "../../store/RT_query/query"
-import { Box, Typography, Avatar, Paper, CircularProgress, Alert } from "@mui/material";
-import { Grid } from "@mui/material"; 
-
+import { useAppDispatch } from "../../store/ReduxHook";
+import { useGetUserQuery } from "../../store/RT_query/query";
+import {
+  Box,
+  Typography,
+  Avatar,
+  CircularProgress,
+  Alert,
+  Card,
+  CardContent,
+  Button,
+} from "@mui/material";
+import { deleteThank } from "../../store/thanks/delete/delete-Thanks";
 
 const UserList = () => {
-  const { data, isLoading, isError } = useGetUserQuery()
+  const { data, isLoading, isError } = useGetUserQuery();
 
-  if (isLoading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
-        <CircularProgress />
-      </Box>
-    );
-  }
+ 
 
-  if (isError) {
-    return (
-      <Box display="flex" justifyContent="center" mt={4}>
-        <Alert severity="error">მონაცემების ჩატვირთვა ვერ მოხერხდა!</Alert>
-      </Box>
-    );
-  }
+const dispatch = useAppDispatch();
+
+const handleDelete = (user) => {
+  dispatch(deleteThank({ role: "user", sendData: user }));
+};
+
+
+
   return (
-      <Box p={4}>
-      <Grid container spacing={4} justifyContent="center">
+    <Box p={4}>
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        gap={4}
+      >
         {data?.map((user) => (
-          <Grid item xs={12} sm={6} md={4} key={user.id}>
-            <Paper
-              elevation={3}
+          <Card
+            key={user.id}
+            sx={{
+              width: 320,
+              display: 'flex',
+              flexDirection: "column",
+              alignItems: 'center',
+              padding: 3,
+              borderRadius: 3,
+              backgroundColor: '#1e1e1e',
+              color: '#fff',
+              boxShadow: 5,
+              flexShrink: 0,
+            }}
+          >
+            <Avatar
+              src={user.profileImage}
+              alt={`${user.firstName} ${user.lastName}`}
               sx={{
-                width: 320,
-                height: 280,
-                padding: 3,
-                borderRadius: 2,
-                bgcolor: "#fafafa",
+                width: 200,
+                height: 200,
+                border: '4px solid #1976d2',
+                boxShadow: '0 0 20px rgba(25, 118, 210, 0.6)',
+                mb: 2,
               }}
-            >
-              <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
-                <Avatar
-                  src={user.profileImage}
-                  alt={`${user.firstName} ${user.lastName}`}
-                  sx={{ width: 80, height: 80 }}
-                />
-                <Typography variant="h6">
-                  {user.firstName} {user.lastName}
-                </Typography>
-              </Box>
+            />
 
-              <Box mt={2}>
-                <Typography variant="body2"><strong>PID:</strong> {user.pid}</Typography>
-                <Typography variant="body2"><strong>Country:</strong> {user.country}</Typography>
-                <Typography variant="body2"><strong>City:</strong> {user.city}</Typography>
-                <Typography variant="body2"><strong>Street:</strong> {user.street}</Typography>
-                <Typography variant="body2"><strong>Email:</strong> {user.email}</Typography>
-                <Typography variant="body2"><strong>Phone:</strong> {user.phoneNumber}</Typography>
-              </Box>
-            </Paper>
-          </Grid>
+            <CardContent sx={{ padding: 0, textAlign: "center" }}>
+              <Typography variant="h6" fontWeight={600} gutterBottom>
+                {user.firstName} {user.lastName}
+              </Typography>
+              <Typography variant="body2"><strong>პირადი ნომერი:</strong> {user.pid}</Typography>
+              <Typography variant="body2"><strong>ქვეყანა:</strong> {user.country}</Typography>
+              <Typography variant="body2"><strong>ქალაქი:</strong> {user.city}</Typography>
+              <Typography variant="body2"><strong>ქუჩა:</strong> {user.street}</Typography>
+              <Typography variant="body2"><strong>ელ-ფოსტა:</strong> {user.email}</Typography>
+              <Typography variant="body2"><strong>ტელეფონი:</strong> {user.phoneNumber}</Typography>
+              <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleDelete(user)}
+              sx={{ mt: 2 }}
+            >
+              წაშლა
+            </Button>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
-}
+};
 
-export default UserList
+export default UserList;

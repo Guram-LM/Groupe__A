@@ -1,15 +1,26 @@
-import { Button } from '@mui/material'
+import { Button, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 const LogautButton = () => {
+  const navigate = useNavigate()
 
-    const navigate = useNavigate()
-  
-    const Logout = () => {
+  const Logout = () => {
     localStorage.removeItem('geste')
     navigate('/')
   }
-  return <Button onClick={Logout}>გასვლა</Button>
+
+  return (
+    <Box sx={{ mt: 2, textAlign: 'center' }}>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={Logout}
+        fullWidth
+      >
+        გასვლა
+      </Button>
+    </Box>
+  )
 }
 
 export default LogautButton

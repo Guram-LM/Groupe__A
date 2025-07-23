@@ -3,8 +3,8 @@ export const containerStyle: SxProps<Theme> = {
   padding: 4,
   display: 'flex',
   flexWrap: 'wrap',
-  gap: 16,                // ცოტა დიდი 16 რომ სველspacing-ი იყოს
-  justifyContent: 'center', // ცენტრირება რომ იყოს
+  gap: 16,                
+  justifyContent: 'center', 
 }
 export const cardWrapperStyle: SxProps<Theme> = {
   flexGrow: 1,

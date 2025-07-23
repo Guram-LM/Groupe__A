@@ -1,3 +1,4 @@
+import { useAppDispatch } from '../../store/ReduxHook';
 import { useGetCouriersQuery } from '../../store/RT_query/query'
 import {
   Card,
@@ -6,10 +7,30 @@ import {
   Avatar,
   Box,
   Divider,
+  Button,
 } from '@mui/material'
+import type { CourierResponseType } from './CourierInterface';
+import { deleteThank } from '../../store/thanks/delete/delete-Thanks';
 
 const CourierList = () => {
-  const { data } = useGetCouriersQuery()
+  const { data, isLoading, isError, refetch  } = useGetCouriersQuery()
+   
+  
+   
+  
+  const dispatch = useAppDispatch();
+  
+  const handleDelete = async (user:CourierResponseType) => {
+      const action = await dispatch(deleteThank({ role: "courier", sendData: user }));
+      if (deleteThank.fulfilled.match(action)) {
+        refetch(); 
+      } else {
+        alert("წაშლა ვერ განხორციელდა");
+      }
+    };
+  
+    if (isLoading) return <div>იტვირთება...</div>;
+    if (isError) return <div>დაფიქსირდა შეცდომა!</div>;
 
   return (
     <Box sx={{ padding: 4 }}>
@@ -97,6 +118,14 @@ const CourierList = () => {
                     </Box>
                   ))}
                 </Box>
+                <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleDelete(courier)}
+              sx={{ mt: 2 }}
+            >
+              წაშლა
+            </Button>
               </CardContent>
             </Card>
           </Box>

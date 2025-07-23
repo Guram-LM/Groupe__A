@@ -30,7 +30,7 @@ import Shaduli from "../page/admin/Shaduli"
 
 const NavBar = () => {
 
-  const geste = JSON.parse(localStorage.getItem("geste") || "null") as UserResponseType | CourierResponseType | AdminResponseType | null
+
   return (
     <Routes>
 
@@ -53,7 +53,7 @@ const NavBar = () => {
 
 
         <Route path="user" element={
-          <ProtectedRoute userDatas={geste} userRole="user">
+          <ProtectedRoute userRole="user">
             <UserLayout/>
           </ProtectedRoute>
         }>
@@ -67,7 +67,7 @@ const NavBar = () => {
 
 
         <Route path="courier" element={
-          <ProtectedRoute userDatas={geste} userRole="courier" >
+          <ProtectedRoute userRole="courier" >
             <CouriersLeyout/>
           </ProtectedRoute>
         } >
@@ -87,7 +87,7 @@ const NavBar = () => {
 
 
         <Route path="/admin" element={
-          <ProtectedRoute userDatas={geste} userRole="admin">
+          <ProtectedRoute  userRole="admin">
              <AdminLayout/> 
           </ProtectedRoute>
         } >

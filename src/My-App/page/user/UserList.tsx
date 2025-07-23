@@ -4,25 +4,31 @@ import {
   Box,
   Typography,
   Avatar,
-  CircularProgress,
-  Alert,
   Card,
   CardContent,
   Button,
 } from "@mui/material";
 import { deleteThank } from "../../store/thanks/delete/delete-Thanks";
+import type { UserResponseType } from "./UserInterface";
 
 const UserList = () => {
-  const { data, isLoading, isError } = useGetUserQuery();
+  const { data, isLoading, isError, refetch } = useGetUserQuery();
 
  
 
 const dispatch = useAppDispatch();
 
-const handleDelete = (user) => {
-  dispatch(deleteThank({ role: "user", sendData: user }));
-};
+const handleDelete = async (user:UserResponseType) => {
+    const action = await dispatch(deleteThank({ role: "user", sendData: user }));
+    if (deleteThank.fulfilled.match(action)) {
+      refetch(); 
+    } else {
+      alert("წაშლა ვერ განხორციელდა");
+    }
+  };
 
+  if (isLoading) return <div>იტვირთება...</div>;
+  if (isError) return <div>დაფიქსირდა შეცდომა!</div>;
 
 
   return (

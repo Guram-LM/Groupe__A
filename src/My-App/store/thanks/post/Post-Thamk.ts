@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Use_Axios, type RoleType, type SendDataType } from "../../../axios/Use_Axios";
+import { Use_Axios, type postDataType, type RoleType } from "../../../axios/Use_Axios";
 import type { UserType } from "../../../page/user/UserInterface";
 export interface ResposeType {
     success: boolean,
@@ -8,7 +8,7 @@ export interface ResposeType {
 }
 interface PropsType {
    role: RoleType
-   sendData: SendDataType
+   sendData: postDataType
 }
 export const createUser = createAsyncThunk(
     "create/user",

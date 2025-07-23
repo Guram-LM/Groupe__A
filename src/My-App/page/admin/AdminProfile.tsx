@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Avatar, Box } from '@mui/material'
+import { Card, Typography, Avatar, Box } from '@mui/material'
 import type { AdminResponseType } from './AdminInterface'
 
 const AdminProfile = () => {

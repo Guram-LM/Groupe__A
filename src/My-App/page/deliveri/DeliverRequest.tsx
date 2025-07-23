@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useGetCouriersQuery } from '../../store/RT_query/query'
 import type { CourierResponseType } from '../corurier/CourierInterface'
 import PaketGewicht from './PaketGewicht'

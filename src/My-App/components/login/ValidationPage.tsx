@@ -1,39 +1,45 @@
-import { useEffect, useState } from 'react'
-import { useGetAdminQuery, useGetCouriersQuery, useGetUserQuery } from '../../store/RT_query/query'
-import LogonPage from './LogonPage'
-import { useNavigate } from 'react-router-dom'
-import type { UserResponseType } from '../../page/user/UserInterface'
-import type { CourierResponseType } from '../../page/corurier/CourierInterface'
-import type { AdminResponseType } from '../../page/admin/AdminInterface'
+import { useEffect } from 'react';
+import { useGetAdminQuery, useGetCouriersQuery, useGetUserQuery } from '../../store/RT_query/query';
+import LogonPage from './LogonPage';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../store/ReduxHook';
+import { setUser } from '../../store/autorisation/Autorisation';
 
 const ValidationPage = () => {
+  const { data: users = [], isLoading: usersLoading } = useGetUserQuery();
+  const { data: couriers = [], isLoading: couriersLoading } = useGetCouriersQuery();
+  const { data: admins = [], isLoading: adminsLoading } = useGetAdminQuery();
 
-    const {data: users= [], isLoading: ussersLoadingi} = useGetUserQuery()
-    const {data: couriers = [], isLoading: couriersLoading} = useGetCouriersQuery()
-    const {data: admins = [], isLoading: adminsLoadingi} = useGetAdminQuery()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const [validUser, setValidUser] = useState<UserResponseType | CourierResponseType | AdminResponseType | null>(null)
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if(validUser) {
-            localStorage.setItem("geste", JSON.stringify(validUser))
-            if(validUser.role === "user")  navigate("/user")
-            else if(validUser.role === "courier")  navigate("/courier")
-            else if(validUser.role === "admin")  navigate("/admin")
-        }
-    }, [validUser, navigate])
+  const user = useAppSelector(state => state.autorisation.user);
 
 
+  useEffect(() => {
+    if (user) {
+      if (user.role === 'user') navigate('/user/userProfile');
+      else if (user.role === 'courier') navigate('/courier/CouriersProfile');
+      else if (user.role === 'admin') navigate('/admin/adminProfile');
+    }
+  }, [user, navigate]);
 
 
-    if (ussersLoadingi || couriersLoading || adminsLoadingi)  return <h1>Loading.....</h1>
+  const handleLogin = (userData: typeof user) => {
+    dispatch(setUser(userData)); 
+  };
+
+  if (usersLoading || couriersLoading || adminsLoading) return <h1>Loading...</h1>;
+
   return (
-    <>
-    <LogonPage admins={admins} couriers={couriers} users={users} identificiren={setValidUser} />
-    </>
-  )
-}
+    <LogonPage
+      admins={admins}
+      couriers={couriers}
+      users={users}
+      identificiren={handleLogin} 
+    />
+  );
+};
 
-export default ValidationPage
+export default ValidationPage;

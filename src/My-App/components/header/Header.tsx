@@ -4,22 +4,20 @@ import HeaderButton from './HeaderButton'
 import { Box, Avatar, IconButton } from '@mui/material'
 import { useState } from 'react'
 import UserMenu from '../MenuButton/UserMenu'
-
+import { useAppSelector } from '../../store/ReduxHook'
 
 const Header = () => {
-  const getItem = localStorage.getItem('geste')
-  const appgest = getItem ? JSON.parse(getItem) : null
-  const gestName = appgest?.firstName?.[0]?.toUpperCase() || ''
+  const user = useAppSelector((state) => state.autorisation.user)
+  const gestName = user?.firstName?.[0]?.toUpperCase() || ''
 
-  
-  const [menuButton, setmenuButton] = useState<null | HTMLElement>(null)
+  const [menuButton, setMenuButton] = useState<null | HTMLElement>(null)
 
-  const Click = (event: React.MouseEvent<HTMLElement>) => {
-    setmenuButton(event.currentTarget)
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuButton(event.currentTarget)
   }
 
-  const onClose = () => {
-    setmenuButton(null)
+  const handleClose = () => {
+    setMenuButton(null)
   }
 
   return (
@@ -38,17 +36,15 @@ const Header = () => {
       <HeaderLogo />
       <HeaderNav />
 
-      {appgest ? (
+      {user ? (
         <>
-
-          <IconButton onClick={Click}>
+          <IconButton onClick={handleClick}>
             <Avatar sx={{ bgcolor: 'white', color: '#1976d2' }}>
               {gestName}
             </Avatar>
           </IconButton>
 
-         
-          <UserMenu menuButton={menuButton} onClose={onClose} />
+          <UserMenu menuButton={menuButton} onClose={handleClose} />
         </>
       ) : (
         <HeaderButton />

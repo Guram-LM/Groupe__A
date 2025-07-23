@@ -3,12 +3,14 @@ import postSlice from "./thanks/post/Post-slice"
 import { Get_Response } from "./RT_query/query";
 import deleteSlice from "./thanks/delete/delete-slice"
 import updateSlice from "./thanks/update/update-slice"
+import authSlice from "./autorisation/Autorisation"
 
 
 const root = combineReducers({
     post: postSlice,
     delete: deleteSlice,
     updata:updateSlice,
+    autorisation: authSlice,
     [Get_Response.reducerPath]: Get_Response.reducer
 })
 

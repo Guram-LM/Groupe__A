@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../store/ReduxHook'
 import { createUser } from '../../store/thanks/post/Post-Thamk'
 import { toast } from 'react-toastify'
 
+
 const AdminRegistration = () => {
 
     const [admin, setAdmin] = useState<AdminType>({
@@ -29,6 +30,7 @@ const AdminRegistration = () => {
 
         if(createUser.fulfilled.match(action)) {
             toast.success("წარმატებული რეგისტრაცია")
+
             setAdmin({
                 firstName: "",
                 lastName: "",

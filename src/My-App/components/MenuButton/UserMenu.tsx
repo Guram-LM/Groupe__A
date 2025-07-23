@@ -1,6 +1,9 @@
 import { Menu, MenuItem } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from '../../store/ReduxHook'
+import { logout } from '../../store/autorisation/Autorisation'
+
 
 interface UserMenuProps {
   menuButton: null | HTMLElement
@@ -10,18 +13,19 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ menuButton, onClose }) => {
   const open = Boolean(menuButton)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const getItem = localStorage.getItem('geste')
-  const user = getItem ? JSON.parse(getItem) : null
+  const user = useAppSelector((state) => state.autorisation.user)
   const role = user?.role
 
-  const Logout = () => {
+  const Logoute = () => {
     localStorage.removeItem('geste')
+    dispatch(logout()) 
     onClose()
     navigate('/')
   }
 
-  const getProfile = () => {
+  const goToProfile = () => {
     onClose()
 
     if (role === 'user') {
@@ -50,8 +54,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ menuButton, onClose }) => {
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem onClick={getProfile}>პროფილი</MenuItem>
-      <MenuItem onClick={Logout}>გამოსვლა</MenuItem>
+      <MenuItem onClick={goToProfile}>პროფილი</MenuItem>
+      <MenuItem onClick={Logoute}>გამოსვლა</MenuItem>
     </Menu>
   )
 }

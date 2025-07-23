@@ -1,16 +1,15 @@
 import { type JSX } from 'react'
 import { Navigate } from 'react-router-dom'
-import type { UserResponseType } from '../../page/user/UserInterface'
-import type { CourierResponseType } from '../../page/corurier/CourierInterface'
-import type { AdminResponseType } from '../../page/admin/AdminInterface'
+import { useAppSelector } from '../../store/ReduxHook'
+
 
 interface RouteProps {
-    userDatas: UserResponseType | CourierResponseType | AdminResponseType | null
     userRole: string
     children: JSX.Element
 }
 
-const ProtectedRoute  = ({children, userDatas, userRole}: RouteProps) => {
+const ProtectedRoute  = ({children,  userRole}: RouteProps) => {
+  const userDatas = useAppSelector(state => state.autorisation.user)
   if(!userDatas) return <Navigate to="/validationPage" replace/>
   if(userDatas.role !== userRole) return <Navigate to="/" replace/>
   return children

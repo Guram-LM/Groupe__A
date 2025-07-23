@@ -1,11 +1,12 @@
 
 import type { AdminResponseType } from "../page/admin/AdminInterface";
 import type { CourierResponseType } from "../page/corurier/CourierInterface";
+import type { BeschtelenType } from "../page/deliveri/BezahlenPage";
 import type { UserResponseType } from "../page/user/UserInterface";
 import { My_Axios } from "./My_Axios";
 
-export type SendDataType = UserResponseType | CourierResponseType | AdminResponseType
-export type RoleType = "user" |  "admin" | "courier"
+export type SendDataType = UserResponseType | CourierResponseType | AdminResponseType | BeschtelenType
+export type RoleType = "user" |  "admin" | "courier" |"beschtelen"
 
 export const Use_Axios ={
     post: (role: RoleType, sendData: SendDataType) => 

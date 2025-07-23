@@ -23,6 +23,7 @@ const [couriers, setCouriers] = useState<CourierType>({
         profileImage: "",
         role: "courier",
         vehicle: "",
+        Beschäftigt: false,
         workingDays: [],
     })
 
@@ -48,6 +49,7 @@ const [couriers, setCouriers] = useState<CourierType>({
                 profileImage: "",
                 role: "courier",
                 vehicle: "",
+                Beschäftigt: false,
                 workingDays: [],
             })
         } else {

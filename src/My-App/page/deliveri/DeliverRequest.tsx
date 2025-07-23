@@ -13,6 +13,17 @@ import {
   buttonStyle,
   sectionStyle,
 } from './DeliverStyle'
+import type { UserResponseType } from '../user/UserInterface'
+
+
+export interface BeschtelunType {
+  kunde: UserResponseType
+  gewicht: string
+  abholAdresse: string
+  zustellAdresse: string
+  voraussichtlicheLieferzeit: number | null
+  preis: number | null
+}
 
 
 const DeliverRequest = () => {
@@ -24,6 +35,7 @@ const DeliverRequest = () => {
   const [zustelladresse, setzustelladresse] = useState('')
   const [randomTime, setRandomTime] = useState<number | null>(null)
   const [randomPreis, setRandomPrais] = useState<number | null>(null)
+  const [hidenButton, sethidenButton] = useState(false)
   const validate = () => {
     if (!paketabholung || !zustelladresse) {
       toast.error('მისამართი სავალდებულოა')
@@ -43,6 +55,7 @@ const DeliverRequest = () => {
     }
     return true
   }
+  console.log("courier:", couriersData);
   const deliverGewicht = () => {
     const gewichtNum = Number(gewich)
     if (gewichtNum <= 2) {
@@ -67,8 +80,23 @@ const DeliverRequest = () => {
     if (!validate()) return
     generate()
     deliverGewicht()
-    toast.success('შეკვეთა წარმატებით გავიდა')
+    sethidenButton(true) 
   }
+
+  const getData = localStorage.getItem("geste")
+  const kunde = getData ? JSON.parse(getData) : null
+
+  const beschtelungData:BeschtelunType = {
+    kunde,
+    gewicht: gewich,
+    abholAdresse: paketabholung,
+    zustellAdresse: zustelladresse,
+    voraussichtlicheLieferzeit: randomTime,
+    preis: randomPreis
+  }
+  
+
+
   return (
     <Box sx={delreqestcontainerStyle}>
       <Box sx={sectionStyle}>
@@ -85,11 +113,18 @@ const DeliverRequest = () => {
       <Box sx={sectionStyle}>
         <RandomPage randomPreis={randomPreis} randomTime={randomTime} />
       </Box>
-      <Button onClick={onClick} sx={buttonStyle}>
-        შეკვეთა
-      </Button>
+
+        {hidenButton ? (
+        <p style={{ fontWeight: 'bold', fontSize: '1.2rem', color: 'green' }}>
+          აირჩიე კურიერი
+        </p>
+         ) : (<Button onClick={onClick} sx={buttonStyle}>
+            
+            შეკვეთა
+          </Button>)}
+      
       <Box sx={sectionStyle}>
-        <CouriersPage couriers={couriers} />
+        <CouriersPage couriers={couriers} beschtelungData={beschtelungData}/>
       </Box>
     </Box>
   )

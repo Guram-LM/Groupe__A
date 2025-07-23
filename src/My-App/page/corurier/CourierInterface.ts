@@ -15,6 +15,7 @@ export interface CourierType {
   password: string;
   profileImage: string;
   vehicle: string;
+  Beschäftigt: boolean
   workingDays: DaySchedule[];
 }
 
@@ -30,6 +31,7 @@ export interface CourierRouResponseType {
 
 export interface CourierResponseType extends CourierType {
   id: string;
+  Beschäftigtyeit?: string
 }
 
 

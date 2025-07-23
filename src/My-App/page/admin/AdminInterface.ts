@@ -1,3 +1,6 @@
+import type { BeschtelenType } from "../deliveri/BezahlenPage";
+
+
 export interface AdminType {
   firstName: string;
   lastName: string;
@@ -7,6 +10,18 @@ export interface AdminType {
   password: string;
   profileImage: string;
   role: "admin";
+}
+
+export interface BeschtelenRouResponseType {
+  id: string;
+  resource: string;
+  data: BeschtelenType;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BeschtelenResponseType extends BeschtelenType {
+  id: string;
 }
 
 export interface AdminRouResponseType {

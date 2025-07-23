@@ -5,12 +5,16 @@ import {
   labelStyle,
   inputStyle
 } from './DeliverStyle'
+
+
 interface DeliverAdreseProp {
   paketabholung: string
   setPaketabholung: React.Dispatch<React.SetStateAction<string>>
   zustelladresse: string
   setzustelladresse: React.Dispatch<React.SetStateAction<string>>
 }
+
+
 const DeliverAdrese: React.FC<DeliverAdreseProp> = ({paketabholung, setPaketabholung, zustelladresse, setzustelladresse }) => {
   return (
     <Box sx={wrapperStyle}>

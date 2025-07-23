@@ -15,7 +15,7 @@ const SidbarButton = () => {
     { url: "/admin/couriersList", mane: "Couriers" },
     { url: "/admin/userRegistration", mane: "Add Customer" },
     { url: "/admin/courierRegistration", mane: "Add Courier" },
-    { url: "/admin/", mane: "Change Schedule" },
+    { url: "/admin/shaduli", mane: "Change Schedule" },
   ]
 
   return (

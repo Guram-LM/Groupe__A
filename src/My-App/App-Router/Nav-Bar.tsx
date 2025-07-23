@@ -22,6 +22,8 @@ import CouriersLeyout from "../page/corurier/CouriersLeyout"
 import CouriersProfile from "../page/corurier/CouriersProfile"
 import AdminLayout from "../page/admin/AdminLayout"
 import AdminProfile from "../page/admin/AdminProfile"
+import BezahlenPage from "../page/deliveri/BezahlenPage"
+import Shaduli from "../page/admin/Shaduli"
 
 
 
@@ -59,6 +61,7 @@ const NavBar = () => {
 
             <Route path="userProfile" element={<UserProfile/>} />
             <Route path="deliverRequest" element={<DeliverRequest/>} />
+            <Route path="bezahlenPage/:id" element={<BezahlenPage/>} />
         </Route>
 
 
@@ -95,6 +98,7 @@ const NavBar = () => {
           <Route path="couriersList" element={<CourierList/>} />
           <Route path="userRegistration" element={<UserRegistration/>} />
           <Route path="courierRegistration" element={<CourierRegistration/>} />
+          <Route path="shaduli" element={<Shaduli/>} />
         
         </Route>
 

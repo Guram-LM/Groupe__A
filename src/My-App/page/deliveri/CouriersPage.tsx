@@ -12,15 +12,52 @@ import {
   dividerStyle,
   workingDayBoxStyle,
 } from './DeliverStyle'
+import type { BeschtelunType } from './DeliverRequest'
+import { useNavigate } from 'react-router-dom'
+
+
+
 interface CouriersProps {
   couriers: CourierResponseType[]
+  beschtelungData: BeschtelunType
 }
-const CouriersPage: React.FC<CouriersProps> = ({ couriers }) => {
+
+const CouriersPage: React.FC<CouriersProps> = ({ couriers, beschtelungData }) => {
+
+  const navigate = useNavigate()
+
+  const sendPrpstBezahlenPage = ( courier: CourierResponseType) => {
+    navigate(`/user/bezahlenPage/${courier.id}`, {
+      state: {
+        courier,
+        beschtelungData
+      }
+    })
+  }
+
+  const nou = new Date()
+
   return (
     <Box sx={containerStyle}>
-      {couriers?.map((courier) => (
-        <Box key={courier.id} sx={cardWrapperStyle}>
-          <Card sx={cardStyle}>
+      {couriers?.map((courier) => { 
+
+
+        const Beschäftigt = courier.Beschäftigtyeit ? new Date(courier.Beschäftigtyeit) : null
+
+        const courierBeschäftigt = Beschäftigt ? Beschäftigt > nou : false
+          return(
+            <Box key={courier.id} sx={cardWrapperStyle} >
+          <Card  sx={{
+        ...cardStyle,
+            cursor: courierBeschäftigt ? 'not-allowed' : 'pointer',
+            opacity: courierBeschäftigt ? 0.5 : 1,
+            position: 'relative',
+          }}
+          onClick={() => {
+            if (!courierBeschäftigt) {
+              sendPrpstBezahlenPage(courier)
+            }
+          }}>
             <CardContent>
               <Box sx={avatarBoxStyle}>
                 <Avatar
@@ -62,7 +99,10 @@ const CouriersPage: React.FC<CouriersProps> = ({ couriers }) => {
             </CardContent>
           </Card>
         </Box>
-      ))}
+          )
+
+        
+       })}
     </Box>
   )
 }

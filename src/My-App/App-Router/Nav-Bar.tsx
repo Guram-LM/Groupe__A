@@ -7,9 +7,6 @@ import CourierList from "../page/corurier/CourierList"
 import AdminRegistration from "../page/admin/AdminRegistration"
 import AdminList from "../page/admin/AdminList"
 import DeliverRequest from "../page/deliveri/DeliverRequest"
-import type { UserResponseType } from "../page/user/UserInterface"
-import type { CourierResponseType } from "../page/corurier/CourierInterface"
-import type { AdminResponseType } from "../page/admin/AdminInterface"
 import UserProfile from "../page/user/UserProfile"
 import UserLayout from "../page/user/UserLayout"
 import WehlenRegisterStatus from "../components/registration/WehlenRegisterStatus"
@@ -24,6 +21,7 @@ import AdminLayout from "../page/admin/AdminLayout"
 import AdminProfile from "../page/admin/AdminProfile"
 import BezahlenPage from "../page/deliveri/BezahlenPage"
 import Shaduli from "../page/admin/Shaduli"
+import UpdateCourierPage from "../page/corurier/UpdateCourierPage"
 
 
 
@@ -99,6 +97,7 @@ const NavBar = () => {
           <Route path="userRegistration" element={<UserRegistration/>} />
           <Route path="courierRegistration" element={<CourierRegistration/>} />
           <Route path="shaduli" element={<Shaduli/>} />
+          <Route path="update/:id" element={<UpdateCourierPage/>} />
         
         </Route>
 

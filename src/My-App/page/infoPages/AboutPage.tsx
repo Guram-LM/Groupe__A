@@ -2,7 +2,7 @@ import { Box, Container, Typography, Card, CardContent, Divider } from '@mui/mat
 
 const backgroundImageUrl =
   'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80'; 
-// ეს არის ნატურალური საკურიერის ფოტო Unsplash-დან, შეგიძლია შეცვალო
+
 
 const AboutPage = () => {
   return (
@@ -17,7 +17,7 @@ const AboutPage = () => {
         py: 12,
       }}
     >
-      {/* მუქი ოვერლეი ფონზე ტექსტის გასარკვევად */}
+    
       <Box
         sx={{
           position: 'absolute',
@@ -27,7 +27,6 @@ const AboutPage = () => {
         }}
       />
 
-      {/* მთავარი კონტეინერი ტექსტისთვის */}
       <Container
         maxWidth="md"
         sx={{
@@ -58,7 +57,7 @@ const AboutPage = () => {
           </Typography>
         </Box>
 
-        {/* ბარათები ჩრდილით და მკაფიო ფონით */}
+      
         <Box mb={8} display="grid" gap={6} sx={{ gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' } }}>
           <Card
             sx={{

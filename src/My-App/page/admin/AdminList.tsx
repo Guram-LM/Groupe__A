@@ -5,7 +5,6 @@ import {
   Avatar,
   Typography,
   CardContent,
-  Stack,
 } from '@mui/material'
 
 const AdminList = () => {

@@ -25,7 +25,7 @@ const UserProfile = () => {
 
   return (
     <Box sx={{ maxWidth: 900, mx: "auto", mt: 8, px: 3 }}>
-      {/* პროფილის ბლოკი */}
+      
       <Paper
         elevation={4}
         sx={{
@@ -65,7 +65,7 @@ const UserProfile = () => {
         </Box>
       </Paper>
 
-      {/* საინფორმაციო ბლოკი */}
+   
       <Box sx={{ mt: 6 }}>
         <Card
           elevation={3}

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../store/ReduxHook';
-import { useGetCouriersQuery } from '../../store/RT_query/query'
+import { useGetCouriersQuery } from '../../store/RT_query/query';
 import {
   Card,
   CardContent,
@@ -8,27 +8,27 @@ import {
   Box,
   Divider,
   Button,
-} from '@mui/material'
+} from '@mui/material';
 import type { CourierResponseType } from './CourierInterface';
 import { deleteThank } from '../../store/thanks/delete/delete-Thanks';
+import { useNavigate } from 'react-router-dom';
 
 const CourierList = () => {
-  const { data, isLoading, isError, refetch  } = useGetCouriersQuery()
-   
-  
+  const { data, isLoading, isError, refetch } = useGetCouriersQuery();
   const dispatch = useAppDispatch();
-  
-  const handleDelete = async (user:CourierResponseType) => {
-      const action = await dispatch(deleteThank({ role: "courier", sendData: user }));
-      if (deleteThank.fulfilled.match(action)) {
-        refetch(); 
-      } else {
-        alert("წაშლა ვერ განხორციელდა");
-      }
-    };
-  
-    if (isLoading) return <div>იტვირთება...</div>;
-    if (isError) return <div>დაფიქსირდა შეცდომა!</div>;
+  const navigate = useNavigate();
+
+  const handleDelete = async (user: CourierResponseType) => {
+    const action = await dispatch(deleteThank({ role: 'courier', sendData: user }));
+    if (deleteThank.fulfilled.match(action)) {
+      refetch();
+    } else {
+      alert('წაშლა ვერ განხორციელდა');
+    }
+  };
+
+  if (isLoading) return <div>იტვირთება...</div>;
+  if (isError) return <div>დაფიქსირდა შეცდომა!</div>;
 
   return (
     <Box sx={{ padding: 4 }}>
@@ -45,9 +45,9 @@ const CourierList = () => {
             key={courier.id}
             sx={{
               width: {
-                xs: '100%',     
-                sm: '47%',       
-                md: '30%',       
+                xs: '100%',
+                sm: '47%',
+                md: '30%',
               },
               display: 'flex',
             }}
@@ -116,21 +116,37 @@ const CourierList = () => {
                     </Box>
                   ))}
                 </Box>
-                <Button
-              variant="contained"
-              color="error"
-              onClick={() => handleDelete(courier)}
-              sx={{ mt: 2 }}
-            >
-              წაშლა
-            </Button>
+
+                
+                
+                <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between', gap: 1 }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => navigate(`/admin/update/${courier.id}`,  { state: courier })}
+                    fullWidth
+                  >
+                    განახლება
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(courier);
+                    }}
+                    fullWidth
+                  >
+                    წაშლა
+                  </Button>
+                </Box>
               </CardContent>
             </Card>
           </Box>
         ))}
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default CourierList
+export default CourierList;

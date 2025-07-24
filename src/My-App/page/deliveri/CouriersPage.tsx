@@ -1,7 +1,7 @@
 import {
   Avatar, Box, Card, CardContent, Divider, Typography
 } from '@mui/material'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import type { CourierResponseType } from '../corurier/CourierInterface'
 import {
   containerStyle,
@@ -22,7 +22,15 @@ interface CouriersProps {
 
 const CouriersPage: React.FC<CouriersProps> = ({ couriers, beschtelungData }) => {
   const navigate = useNavigate()
-  const now = new Date()
+  const [now, setNow] = useState(new Date())
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(new Date())
+    }, 10000) 
+
+    return () => clearInterval(interval)
+  }, [])
 
   const goToBezahlenPage = (courier: CourierResponseType) => {
     navigate(`/user/bezahlenPage/${courier.id}`, {
@@ -98,6 +106,23 @@ const CouriersPage: React.FC<CouriersProps> = ({ couriers, beschtelungData }) =>
                   </Box>
                 ))}
               </CardContent>
+
+              {isBusy && (
+                <Box sx={{
+                  position: 'absolute',
+                  top: 8,
+                  right: 8,
+                  bgcolor: 'rgba(255,0,0,0.7)',
+                  color: 'white',
+                  px: 1,
+                  borderRadius: 1,
+                  fontWeight: 'bold',
+                  pointerEvents: 'none',
+                  userSelect: 'none'
+                }}>
+                  დაკავებულია
+                </Box>
+              )}
             </Card>
           </Box>
         )

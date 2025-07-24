@@ -62,7 +62,7 @@ const CourierSlider: React.FC<CourierSliderProps> = ({ couriers }) => {
         boxShadow: "0 0 30px 10px rgba(255, 215, 0, 0.3)",
       }}
     >
-      {/* Prev Button */}
+   
       <Button
         onClick={handlePrev}
         variant="outlined"
@@ -83,7 +83,7 @@ const CourierSlider: React.FC<CourierSliderProps> = ({ couriers }) => {
         &#8592;
       </Button>
 
-      {/* კურიერის ინფორმაცია */}
+   
       <Box
         sx={{
           border: "3px solid #ffd700",
@@ -119,7 +119,7 @@ const CourierSlider: React.FC<CourierSliderProps> = ({ couriers }) => {
         </Typography>
       </Box>
 
-      {/* Next Button */}
+      
       <Button
         onClick={handleNext}
         variant="outlined"

@@ -31,7 +31,7 @@ export interface CourierRouResponseType {
 
 export interface CourierResponseType extends CourierType {
   id: string;
-  Beschäftigtyeit?: string
+  Beschäftigtyeit?: string | null
 }
 
 

@@ -7,21 +7,17 @@ import type { BeschtelunType } from './DeliverRequest'
 import { useAppDispatch } from '../../store/ReduxHook'
 import { createUser } from '../../store/thanks/post/Post-Thamk'
 import { Box, Typography, Paper } from '@mui/material'
-import { updateThankh } from '../../store/thanks/update/updata-Thants'
 
 export interface BeschtelenType extends BeschtelunType {
   courier: CourierResponseType;
   bezhalen: string;
-  Beschäftigtyeit: string;
+  Beschäftigtyeit: string
 }
 
 const BezahlenPage = () => {
   const [bezahlMetode, setBezahlMetode] = useState("")
   const lokation = useLocation()
-  const { beschtelungData, courier } = lokation.state as {
-    courier: CourierResponseType,
-    beschtelungData: BeschtelunType
-  }
+  const { beschtelungData, courier } = lokation.state as { courier: CourierResponseType, beschtelungData: BeschtelunType }
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -32,7 +28,7 @@ const BezahlenPage = () => {
     }
 
     const Beschäftigtyeit = new Date(
-      Date.now() + (beschtelungData.voraussichtlicheLieferzeit ?? 15) * 60 * 1000
+      Date.now() + (beschtelungData.voraussichtlicheLieferzeit ?? 0) * 60000
     ).toISOString()
 
     const sendData: BeschtelenType = {
@@ -42,40 +38,13 @@ const BezahlenPage = () => {
       Beschäftigtyeit
     }
 
-    // 🔹 ჯერ ვაცნობებთ რომ კურიერი დაკავებულია
-    await dispatch(updateThankh({
-      role: "courier",
-      sendData: {
-        ...courier,
-        id: courier.id,
-        Beschäftigt: true
-      }
-    }))
 
-    // 🔹 შემდეგ ვაგზავნით შეკვეთას
+    console.log('Send data:', sendData)
+
     const action = await dispatch(createUser({ role: "beschtelen", sendData }))
     if (createUser.fulfilled.match(action)) {
       toast.success("შეკვეთა მიღებულია")
       navigate("/user/userProfile")
-
-      // 🔹 გათავისუფლების დრო ვითვლით Beschäftigtyeit-ზე დაყრდნობით
-      const busyUntil = new Date(Beschäftigtyeit).getTime()
-      const now = Date.now()
-      const timeoutMs = Math.max(busyUntil - now, 0)
-
-      setTimeout(() => {
-        dispatch(updateThankh({
-          role: "courier",
-          sendData: {
-            ...courier,
-            id: courier.id,
-            Beschäftigt: false
-          }
-        }))
-      }, timeoutMs)
-
-    } else {
-      toast.error("შეკვეთის გაგზავნა ვერ მოხერხდა")
     }
   }
 
@@ -83,7 +52,7 @@ const BezahlenPage = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        bgcolor: '#0f172a',
+        bgcolor: '#0f172a', 
         p: 4,
         display: 'flex',
         flexDirection: 'column',

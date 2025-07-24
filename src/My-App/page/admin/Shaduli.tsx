@@ -25,7 +25,7 @@ const Shaduli = () => {
             sx={{
               p: 3,
               borderRadius: 3,
-              bgcolor: "rgba(25, 118, 210, 0.25)", // ქარდების ლურჯი ფონი
+              bgcolor: "rgba(25, 118, 210, 0.25)", 
               boxShadow:
                 "0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06)",
               width: "100%",
@@ -69,7 +69,8 @@ const Shaduli = () => {
 
             <Divider sx={{ my: 3, borderColor: "#bfa24a" }} />
 
-            {/* კურიერი */}
+           
+           
             <Typography
               variant="h5"
               fontWeight="700"
@@ -106,7 +107,7 @@ const Shaduli = () => {
 
             <Divider sx={{ my: 3, borderColor: "#bfa24a" }} />
 
-            {/* შეკვეთის დეტალები */}
+           
             <Typography
               variant="h5"
               fontWeight="700"

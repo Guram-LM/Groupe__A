@@ -28,7 +28,7 @@ const BezahlMetode: React.FC<BezahlProps> = ({ bezahlMetode, setBezahlMetode, se
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        minHeight: 250 // ღილაკისთვის საკმარისი სიმაღლე
+        minHeight: 250 
       }}
     >
       <Box>

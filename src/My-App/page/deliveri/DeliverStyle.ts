@@ -8,9 +8,8 @@ export const containerStyle: SxProps<Theme> = {
 }
 export const cardWrapperStyle: SxProps<Theme> = {
   flexGrow: 1,
-  minWidth: 320,       // მინიმუმი სიგანე, რომ 2 მოაჯდეს გვერდზე (350-ს ნაცვლად)
-  maxWidth: 360,       // მაქსიმუმი სიგანე
-  // width: 'calc(50% - 16px)',  // ალტერნატივად შეიძლება პროცენტული
+  minWidth: 320,       
+  maxWidth: 360,     
 }
 export const cardStyle: SxProps<Theme> = {
   boxShadow: 4,

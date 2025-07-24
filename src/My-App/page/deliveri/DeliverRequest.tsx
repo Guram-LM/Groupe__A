@@ -28,6 +28,7 @@ export interface BeschtelunType {
 
 const DeliverRequest = () => {
   const { data } = useGetCouriersQuery()
+
   const couriersData: CourierResponseType[] = data ?? []
   const [gewich, setWeight] = useState('')
   const [couriers, setCouriers] = useState<CourierResponseType[]>([])
@@ -36,7 +37,7 @@ const DeliverRequest = () => {
   const [randomTime, setRandomTime] = useState<number | null>(null)
   const [randomPreis, setRandomPrais] = useState<number | null>(null)
   const [hidenButton, sethidenButton] = useState(false)
-  
+
   const validate = () => {
     if (!paketabholung || !zustelladresse) {
       toast.error('მისამართი სავალდებულოა')

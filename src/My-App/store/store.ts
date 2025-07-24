@@ -4,6 +4,7 @@ import { Get_Response } from "./RT_query/query";
 import deleteSlice from "./thanks/delete/delete-slice"
 import updateSlice from "./thanks/update/update-slice"
 import authSlice from "./autorisation/Autorisation"
+import couriersSlice from "./thanks/beschediktCouriers/BeschediktCouriers"
 
 
 const root = combineReducers({
@@ -11,6 +12,7 @@ const root = combineReducers({
     delete: deleteSlice,
     updata:updateSlice,
     autorisation: authSlice,
+    beschediktCourier: couriersSlice,
     [Get_Response.reducerPath]: Get_Response.reducer
 })
 

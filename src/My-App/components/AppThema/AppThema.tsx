@@ -2,12 +2,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export const theme = createTheme({
   palette: {
-    mode: 'dark', // თუ გინდა მუქი ფონი მთლიანად
+    mode: 'dark', 
     background: {
-      default: '#121212',  // Body-ს მუქი ფონი
+      default: '#121212', 
     },
     text: {
-      primary: '#DAA520',  // ოქროსფერი ტექსტი მთელ body-ზე
+      primary: '#DAA520', 
     },
   },
 })

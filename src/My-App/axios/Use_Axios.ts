@@ -14,6 +14,6 @@ export const Use_Axios ={
           My_Axios.post(`/resource/${role}`, {data: [sendData]}),
     delete: (role: RoleType, sendData: SendDataType) =>
         My_Axios.delete(`/resource/${role}/${sendData.id}`),
-    put: (role: RoleType, sendData: SendDataType) =>
-         My_Axios.put(`/resource/${role}`, { data: [sendData] }),
+    put: (role: RoleType, sendData: SendDataType & { id: string }) =>
+        My_Axios.put(`/resource/${role}/${sendData.id}`, { data: sendData }),
 }

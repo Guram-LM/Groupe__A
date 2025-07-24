@@ -6,6 +6,7 @@ import { Button, Paper, Box } from '@mui/material'
 import { useAppDispatch } from '../../store/ReduxHook'
 import { createUser } from '../../store/thanks/post/Post-Thamk'
 import { toast } from 'react-toastify'
+import { validateAdmin } from './ValidateAdmin'
 
 const AdminRegistration = () => {
   const [admin, setAdmin] = useState<AdminType>({
@@ -23,6 +24,12 @@ const AdminRegistration = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const error = validateAdmin(admin);
+        if (error) {
+          toast.warn(error);
+          return;
+        }
 
     const action = await dispatch(createUser({ role: "admin", sendData: admin }))
 

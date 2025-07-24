@@ -7,6 +7,7 @@ import { createUser } from "../../store/thanks/post/Post-Thamk"
 import { toast } from "react-toastify"
 import type { UseLocation, UserType } from "./UserInterface"
 import type { InputeType } from "../../form/FormInterface"
+import { validateUser } from "./ValidateUser"
 
 const UserRegistration = () => {
   const [userData, setUserData] = useState<UserType>({
@@ -34,6 +35,14 @@ const UserRegistration = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const error = validateUser(userData);
+    if (error) {
+      toast.warn(error);
+      return;
+    }
+
+
     const action = await dispatch(createUser({ role: "user", sendData: userData }))
     if (createUser.fulfilled.match(action)) {
       toast.success("წარმატებული რეგისტრაცია")

@@ -16,8 +16,6 @@ const CourierList = () => {
   const { data, isLoading, isError, refetch  } = useGetCouriersQuery()
    
   
-   
-  
   const dispatch = useAppDispatch();
   
   const handleDelete = async (user:CourierResponseType) => {

@@ -8,6 +8,7 @@ import type { InputeType } from '../../form/FormInterface'
 import { useAppDispatch } from '../../store/ReduxHook'
 import { createUser } from '../../store/thanks/post/Post-Thamk'
 import { toast } from 'react-toastify'
+import { validateCourier } from './InputValidation'
 
 export const CourierRegistration = () => {
   const [couriers, setCouriers] = useState<CourierType>({
@@ -23,7 +24,7 @@ export const CourierRegistration = () => {
     Beschäftigt: false,
     workingDays: [],
   })
-
+  
   const cangeWorkDay = (workingDays: DaySchedule[]) => {
     setCouriers((prev) => ({ ...prev, workingDays }))
   }
@@ -32,6 +33,13 @@ export const CourierRegistration = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const error = validateCourier(couriers);
+    if (error) {
+      toast.warn(error);
+      return;
+    }
+    
     const action = await dispatch(createUser({ role: "courier", sendData: couriers }))
 
     if (createUser.fulfilled.match(action)) {

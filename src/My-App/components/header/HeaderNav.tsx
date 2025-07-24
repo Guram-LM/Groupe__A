@@ -7,7 +7,7 @@ interface NavProps {
 }
 
 const headerNav: NavProps[] = [
-  { name: 'Home', path: '/home' },
+  { name: 'Home', path: '/' },
   { name: 'About', path: '/aboutPage' },
   { name: 'Contact', path: '/contactPage' }
 ]
